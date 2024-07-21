@@ -18,7 +18,7 @@ class Genre(models.Model):
         null=True
     )
     def __str__(self):
-        return f"{self.pk} {self.name}"
+        return f"{self.name} #{self.pk}"
     
 class Publishing(models.Model):
     name = models.CharField(max_length=100)
@@ -27,7 +27,48 @@ class Publishing(models.Model):
         null=True
     )
     def __str__(self):
-        return f"{self.pk} {self.name}"  
+        return f"{self.name} #{self.pk}"  
+
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+    def __str__(self):
+        return f"{self.name} #{self.pk}"  
+
+class Serie(models.Model):
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.PROTECT,
+        default=1,
+        related_name='series'
+    )
+    name = models.CharField(max_length=100)
+    total_number = models.PositiveBigIntegerField()
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+    def __str__(self):
+        return f"{self.name} #{self.pk}"  
+
+class SeriesPrivately(models.Model):
+    book_number = models.PositiveBigIntegerField()
+    book_name = models.TextField()
+    series_name = models.ForeignKey(
+        Serie,
+        on_delete=models.PROTECT,
+        default=1,
+        related_name='privately'
+    )
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+    def __str__(self):
+        return f"{self.book_number} {self.book_name} #{self.pk}"  
 
 # class Book(models.Model):
 #     name = models.CharField(max_length=100)
