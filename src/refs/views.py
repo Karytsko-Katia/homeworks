@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse, reverse_lazy
 
 from . import models
 
@@ -9,16 +10,22 @@ from . import models
 
 def author_list(request):
     authors = models.Author.objects.all()
-    html = "<a href=\"/author-create/\">Create  new</a> <br><table border = \"2 \"> <tr><td>id</td><td>name</td><td>-----</td><td>-----</td></tr>"
-    for author in authors:
-        html += f"""
-        <tr>
-            <td>{author.id}</td>
-            <td>{author.name}</td>
-            <td><a href=\"/author-detail/{author.id}\">view</a>  || <td><a href=\"/author-update/{author.id}\">update</a>
-        </td></tr>"""
-    html += "</table>"
-    return HttpResponse(html)
+    context = {
+        'objects_list': authors,
+        'page_title': "Author list"
+    }
+    return render(request, template_name="author-list.html", context=context)
+    # html = "<a href=\"/author-create/\">Create  new</a> <br><table border = \"2 \"> <tr><td>id</td><td>name</td><td>-----</td><td>-----</td></tr>"
+    # for author in authors:
+    #     html += f"""
+    #     <tr>
+    #         <td>{author.id}</td>
+    #         <td>{author.name}</td>
+    #         <td><a href=\"/author-detail/{author.id}\">view</a>  || <td><a href=\"/author-update/{author.id}\">update</a>
+    #     </td></tr>"""
+    # html += "</table>"
+    # return HttpResponse(html)
+
 
 def author_detail(request, author_id):
     # pk = ???
@@ -65,7 +72,7 @@ def author_create(request):
         description = request.POST.get('description')
         new_author = models.Author.objects.create(name=name, description=description)
         # /author-detail/id/
-        return HttpResponseRedirect(f"/author-detail/{new_author.id}/")
+        return HttpResponseRedirect(reverse_lazy("references:author-detail", kwargs={"author_id":new_author.id}))
 
 @csrf_exempt
 def author_update(request, author_id):
@@ -90,7 +97,7 @@ def author_update(request, author_id):
             name=name,
             description=description 
         )
-        return HttpResponseRedirect(f"/author-detail/{author_id}/")
+        return HttpResponseRedirect(reverse_lazy("references:author-detail", kwargs={"author_id":author_id}))
     
 def series_list(request):
     series = models.Serie.objects.all()
@@ -152,7 +159,7 @@ def series_create(request):
             description = description
         )
         print(new_serie)
-        return HttpResponseRedirect(f"/series-detail/{new_serie.id}/")
+        return HttpResponseRedirect(reverse_lazy("references:series-detail", kwargs={"serie_id":new_serie.id}))
     
     
     #     name = request.POST.get('name')

@@ -24,7 +24,7 @@
                 <td>{{ obj.name }}</td>
                 <td>{{ obj.total_number }}</td>
                 <td>{{ obj.description }}</td>
-                <td><a href="/series-detail/{{ obj.id }}">view</a></td>
+                <td><a href="{% url 'references:series-detail' obj.id %}">view</a></td>
             </tr>
             {% endfor %}
         </table>

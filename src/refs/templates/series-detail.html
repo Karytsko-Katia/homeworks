@@ -13,9 +13,10 @@
         <ul>
             <li><b>Author name: </b>{{ obj.author }}</li>
             <li><b>Author name: </b>{{ obj.author.name }}</li>
-            <ti><b>Author: </b><a href="/author-detail/{{ obj.author.id }}">{{ obj.author.name }}</a></li>
+            <ti><b>Author: </b><a href="{% url 'references:author-detail' obj.author.id %}">{{ obj.author.name }}</a></li>
             <li><b>Book of seria: </b>{{ obj.total_number }}</li>
             <li><b>Description: </b>{{ obj.description }}</li>
         </ul>
     </body>
 </html>
+
