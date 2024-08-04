@@ -17,8 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from test_app import views
+from refs import views as refs_views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_page),
+    path('author-list/', refs_views.author_list),
+    path('author-detail/<int:author_id>/', refs_views.author_detail),
+    path('author-update/<int:author_id>/', refs_views.author_update),
+    path('author-create/', refs_views.author_create),
+    path('series-list/', refs_views.series_list),
+    path('series-detail/<int:serie_id>/', refs_views.series_detail),
+    path('series-create/', refs_views.series_create),
 ]

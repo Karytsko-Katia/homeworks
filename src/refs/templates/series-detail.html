@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
+        <title>{{ page_title }}</title>
+    </head>
+    <body>
+        <h1>{{ heading }}</h1>
+        <p>{{ message}}</p>
+        <h1>Serie #{{ obj.id }} {{ obj.name }} details: </h1>
+
+        <ul>
+            <li><b>Author name: </b>{{ obj.author }}</li>
+            <li><b>Author name: </b>{{ obj.author.name }}</li>
+            <ti><b>Author: </b><a href="/author-detail/{{ obj.author.id }}">{{ obj.author.name }}</a></li>
+            <li><b>Book of seria: </b>{{ obj.total_number }}</li>
+            <li><b>Description: </b>{{ obj.description }}</li>
+        </ul>
+    </body>
+</html>

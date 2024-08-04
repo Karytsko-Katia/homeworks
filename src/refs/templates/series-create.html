@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
+        <title>{{ page_title }}</title>
+    </head>
+    <body>
+        <h1>{{ heading }}</h1>
+        <p>{{ message}}</p>
+       <form action="" method="post">
+        {% csrf_token %}
+            <input type="text"  name="name" maxlength="100" required><br>
+            <label for="total_number">Total_number</label>
+            <input type="number" id="total_number" name="total_number" min="1" value="{{ total_number|default:''}}"><br>
+            <textarea name="description" id=""></textarea><br>
+            <select name="author" id="" >
+                {% for author in authors %}
+                <option value="{{ author.id }}">{{ author.name}}</option>
+                {% endfor %}
+            </select><br>
+        <button type="submit">Save</button>
+       </form>
+    </body>
+</html>
