@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse, reverse_lazy
+from django.views import generic
 
 from . import models
 
@@ -102,17 +103,15 @@ def author_update(request, author_id):
 def series_list(request):
     series = models.Serie.objects.all()
     context = {
-        'objects_list': series,
-        'page_title': "Series list"
+    'objects_list': series,
+    'page_title': "Series list"
     }
     return render(request, template_name="series-list.html", context=context)
- # html = "<table border = \"2 \"> <tr><td>id</td><td>name</td><td>-----</td></tr>"
-    # for serie in series:
-    #     html += f"<tr><td>{serie.id}</td><td>{serie.name}</td><td><a href=\"/series-detail/?serie_id={serie.id}\">view</a></td></tr>"
-    # html += "</table>"
-    # MVT (MVC)
-    # ORM -> SQLAlchemy
-    # TE (template engine) -> Jinja
+
+
+class SeriesList(generic.ListView):
+    model = models.Serie
+    # context_object_name = 'series'
 
 def series_detail(request, serie_id):
     serie = models.Serie.objects.get(pk=serie_id)

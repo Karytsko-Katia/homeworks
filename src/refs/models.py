@@ -46,7 +46,7 @@ class Serie(models.Model):
         related_name='series'
     )
     name = models.CharField(max_length=100)
-    total_number = models.PositiveBigIntegerField()
+    total_number = models.PositiveIntegerField()
     description = models.TextField(
         blank=True,
         null=True
@@ -55,7 +55,7 @@ class Serie(models.Model):
         return f"{self.name} #{self.pk}"  
 
 class SeriesPrivately(models.Model):
-    book_number = models.PositiveBigIntegerField()
+    book_number = models.PositiveIntegerField()
     book_name = models.TextField()
     series_name = models.ForeignKey(
         Serie,
