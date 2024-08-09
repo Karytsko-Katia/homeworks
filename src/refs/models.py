@@ -30,7 +30,7 @@ class Publishing(models.Model):
         return f"{self.name} #{self.pk}"  
 
 class Author(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     description = models.TextField(
         blank=True,
         null=True
