@@ -9,13 +9,13 @@ from . import models
 
 # Create your views here.
 
-def author_list(request):
-    authors = models.Author.objects.all()
-    context = {
-        'objects_list': authors,
-        'page_title': "Author list"
-    }
-    return render(request, template_name="author-list.html", context=context)
+# def author_list(request):
+#     authors = models.Author.objects.all()
+#     context = {
+#         'objects_list': authors,
+#         'page_title': "Author list"
+#     }
+#     return render(request, template_name="author-list.html", context=context)
     # html = "<a href=\"/author-create/\">Create  new</a> <br><table border = \"2 \"> <tr><td>id</td><td>name</td><td>-----</td><td>-----</td></tr>"
     # for author in authors:
     #     html += f"""
@@ -27,29 +27,34 @@ def author_list(request):
     # html += "</table>"
     # return HttpResponse(html)
 
+class AuthorList(generic.ListView):
+    model = models.Author
 
-def author_detail(request, author_id):
-    # pk = ???
-    # GET http://127.0.0.1:8000/author-detail/?author_id=2&abc=12
-    # author_id = request.GET.get("author_id")
-    # URL http://127.0.0.1:8000/author-detail/2/
-    # POST http://127.0.0.1:8000/author-detail  (web-form)
-    # author_id = request.GET.get("author_id")
-    # author = models.Author.objects.get(pk=author_id)
-    # html = f"<h1> Author Detail</h1> <br>{author.pk} {author.name}<br>"
-    # series = author.series.all()
-    # if series:
-    #     html += "Series of Author: <ul>"
-    #     for serie in series:
-    #         html += f"<li> total number {serie.total_number}, title {serie.name}</Li>"
-    #     html += "</ul>"
-    # return HttpResponse(html)
-    author = models.Author.objects.get(pk=author_id)
-    context = {
-        'obj': author,
-        'page_title': f"Author detail #{author_id}"
-    }
-    return render(request, template_name="author-detail.html", context=context)
+class AuthorDetail(generic.DetailView):
+    model = models.Author
+
+# def author_detail(request, author_id):
+#     # pk = ???
+#     # GET http://127.0.0.1:8000/author-detail/?author_id=2&abc=12
+#     # author_id = request.GET.get("author_id")
+#     # URL http://127.0.0.1:8000/author-detail/2/
+#     # POST http://127.0.0.1:8000/author-detail  (web-form)
+#     # author_id = request.GET.get("author_id")
+#     # author = models.Author.objects.get(pk=author_id)
+#     # html = f"<h1> Author Detail</h1> <br>{author.pk} {author.name}<br>"
+#     # series = author.series.all()
+#     # if series:
+#     #     html += "Series of Author: <ul>"
+#     #     for serie in series:
+#     #         html += f"<li> total number {serie.total_number}, title {serie.name}</Li>"
+#     #     html += "</ul>"
+#     # return HttpResponse(html)
+#     author = models.Author.objects.get(pk=author_id)
+#     context = {
+#         'obj': author,
+#         'page_title': f"Author detail #{author_id}"
+#     }
+#     return render(request, template_name="author-detail.html", context=context)
 
 @csrf_exempt
 def author_create(request):
@@ -100,30 +105,87 @@ def author_update(request, author_id):
         )
         return HttpResponseRedirect(reverse_lazy("references:author-detail", kwargs={"author_id":author_id}))
     
-def series_list(request):
-    series = models.Serie.objects.all()
-    context = {
-    'objects_list': series,
-    'page_title': "Series list"
-    }
-    return render(request, template_name="series-list.html", context=context)
+# def series_list(request):
+#     series = models.Serie.objects.all()
+#     context = {
+#     'objects_list': series,
+#     'page_title': "Series list"
+#     }
+#     return render(request, template_name="series-list.html", context=context)
 
+class GenreList(generic.ListView):
+    model = models.Genre
+
+class GenreDetail(generic.DetailView):
+    model = models.Genre  
+
+# def genre_detail(request, genre_id):
+#     genre = models.Genre.objects.get(pk=genre_id)
+#     context = {
+#         'obj': genre,
+#         'page_title': f"Genre detail #{genre_id}"
+#     }
+#     return render(
+#         request, 
+#         template_name="genre-detail.html", 
+#         context=context
+#         )
+
+class PublishingList(generic.ListView):
+    model = models.Publishing
+
+class PublishingDetail(generic.DetailView):
+    model = models.Publishing
+
+# def publishing_detail(request, publishing_id):
+#     publishing = models.Publishing.objects.get(pk=publishing_id)
+#     context = {
+#         'obj': publishing,
+#         'page_title': f"Publishing detail #{publishing_id}"
+#     }
+#     return render(
+#         request, 
+#         template_name="publishing-detail.html", 
+#         context=context
+#         )
 
 class SeriesList(generic.ListView):
     model = models.Serie
     # context_object_name = 'series'
 
-def series_detail(request, serie_id):
-    serie = models.Serie.objects.get(pk=serie_id)
+class SeriesDetail(generic.DetailView):
+    model = models.Serie
+
+def seriesprivately_detail(request, seriesprivately_id):
+    seriesprivately = models.SeriesPrivately.objects.get(pk=seriesprivately_id)
     context = {
-        'obj': serie,
-        'page_title': f"Series detail #{serie_id}"
+        'obj': seriesprivately,
+        'page_title': f"Seriesprivately detail #{seriesprivately_id}"
     }
     return render(
         request, 
-        template_name="series-detail.html", 
+        template_name="seriesprivately-detail.html", 
         context=context
         )
+
+class SeriesPrivatelyList(generic.ListView):
+    model = models.SeriesPrivately
+   
+
+class SeriesPrivatelyDetail(generic.DetailView):
+    model = models.SeriesPrivately
+   
+# def series_detail(request, serie_id):
+#     serie = models.Serie.objects.get(pk=serie_id)
+#     context = {
+#         'obj': serie,
+#         'page_title': f"Series detail #{serie_id}"
+#     }
+#     return render(
+#         request, 
+#         template_name="series-detail.html", 
+#         context=context
+#         )
     # serie_id = request.GET.get("serie_id")
     # serie = models.Serie.objects.get(pk=serie_id)
     # html = f"""<h1> Series Detail</h1> 

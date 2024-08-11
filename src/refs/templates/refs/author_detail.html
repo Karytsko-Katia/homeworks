@@ -8,17 +8,17 @@
     <body>
         <h1>{{ heading }}</h1>
         <p>{{ message}}</p>
-        <h1>Author #{{ obj.id }} {{ obj.name }} details: </h1>
+        <h1>Author #{{ object.id }} {{ object.name }} details: </h1>
 
         <ul>
-            <li><b>Author name: </b>{{ obj.name }}</li>
-            <li><b>Description: </b>{{ obj.description }}</li>
+            <li><b>Author name: </b>{{ object.name }}</li>
+            <li><b>Description: </b>{{ object.description }}</li>
         </ul>
 
 
-        {% if obj.series.all %}
+        {% if object.series.all %}
             <h2><b>Series of book by this Author: </b></h2>
-            {% for serie in obj.series.all %}
+            {% for serie in object.series.all %}
                 <ul>
                         <li> {{serie.name}}</li>
                 </ul>

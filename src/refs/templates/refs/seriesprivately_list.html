@@ -11,32 +11,22 @@
         <table border="2">
             <tr>
                 <th>ID</th>
-                <th>Author of seria</th>
+                <th>Book's name</th>
+                <th>Book's number of seria</th>
                 <th>Series name</th>
+                <th>Author of seria</th>
                 <th>-----</th>
             {% for obj in object_list %} 
             <tr>
                 <td> #{{ obj.id }} </td>
-                <td> {{ obj.author }} </td>
-                <td> {{ obj.name }} </td>
-                <td><a href="{% url 'references:series-detail' obj.id %}">view</a></td>
+                <td> {{ obj.book_name }} </td>
+                <td> {{ obj.book_number }} </td>
+                <td> {{ obj.series_name }} </td>
+                <td> {{ obj.series_name.author }} </td>
+                <td><a href="{% url 'references:seriesprivately-detail' obj.id %}">view</a></td>
             </tr>
             {% endfor %}
         </table>
     </body>
 </html>
 
-<!-- <th>total_number</th>
-<th>description</th>
-<th>actions</th> -->
-<!-- {% for obj in objects_list %}
-<tr>
-    <td> {{ obj.id }}</td>
-    <td>{{ obj.author }}</td>
-    <td>{{ obj.name }}</td>
-    <td>{{ obj.total_number }}</td>
-    <td>{{ obj.description }}</td>
-    <td><a href="{% url 'references:series-detail' obj.id %}">view</a></td>
-</tr>
-{% endfor %}
-</table> -->
