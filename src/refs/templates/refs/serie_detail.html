@@ -16,6 +16,8 @@
             <ti><b>Author: </b><a href="{% url 'references:author-detail' object.author.id %}">{{ object.author.name }}</a></li>
             <li><b>Book of seria: </b>{{ object.total_number }}</li>
             <li><b>Description: </b>{{ object.description }}</li>
+            <li><b>Update this seria: </b><a href="{% url 'references:series-update' object.id %}">{{ object.name }}</a></li>
+            <li><b>Delete this seria: </b><a href="{% url 'references:series-delete' object.id %}">{{ object.name }}</a></li>
         </ul>
     </body>
 </html>

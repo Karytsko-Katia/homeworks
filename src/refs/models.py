@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse, reverse_lazy
 
 # Create your models here.
 
@@ -20,6 +21,9 @@ class Genre(models.Model):
     def __str__(self):
         return f"{self.name} #{self.pk}"
     
+    def get_absolute_url (self):
+        return reverse_lazy("references:genre-detail", kwargs={"pk":self.pk})
+    
 class Publishing(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(
@@ -27,7 +31,10 @@ class Publishing(models.Model):
         null=True
     )
     def __str__(self):
-        return f"{self.name} #{self.pk}"  
+        return f"{self.name} #{self.pk}"
+
+    def get_absolute_url (self):
+        return reverse_lazy("references:publishing-detail", kwargs={"pk":self.pk})  
 
 class Author(models.Model):
     name = models.CharField(max_length=200)
@@ -36,7 +43,10 @@ class Author(models.Model):
         null=True
     )
     def __str__(self):
-        return f"{self.name} #{self.pk}"  
+        return f"{self.name} #{self.pk}"
+    
+    def get_absolute_url (self):
+        return reverse_lazy("references:author-detail", kwargs={"pk":self.pk})  
 
 class Serie(models.Model):
     author = models.ForeignKey(
@@ -52,7 +62,11 @@ class Serie(models.Model):
         null=True
     )
     def __str__(self):
-        return f"{self.name} #{self.pk}"  
+        return f"{self.name} #{self.pk}"
+    
+    def get_absolute_url (self):
+        return reverse_lazy("references:series-detail", kwargs={"pk":self.pk})
+    # return f"/series-detail/{self.pk}/"
 
 class SeriesPrivately(models.Model):
     book_number = models.PositiveIntegerField()
@@ -69,6 +83,9 @@ class SeriesPrivately(models.Model):
     )
     def __str__(self):
         return f"{self.book_number} {self.book_name} #{self.pk}"  
+    
+    def get_absolute_url (self):
+        return reverse_lazy("references:seriesprivately-detail", kwargs={"pk":self.pk})
 
 
 # class Book(models.Model):

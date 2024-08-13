@@ -9,7 +9,7 @@
         <h1>{{ heading }}</h1>
         <p>{{ message}}</p>
 
-        <h1>Seriesprivately #{{ object.id }} details: </h1>
+        <h1>Seriesprivately #{{ object.id }} {{ object.book_name }} details: </h1>
 
         <ul>
             <li><b>Author of seria </b>{{ object.series_name.author }}</li>
@@ -22,6 +22,8 @@
             <li><b>Book's name </b>{{ object.book_name }}</li>
             <li><b>Book's number of seria </b>{{ object.book_number }}</li>
             <li><b>Description: </b>{{ object.description }}</li>
+            <li><b>Update this Seriesprivately: </b><a href="{% url 'references:seriesprivately-update' object.id %}">Start updating!</a></li>
+            <li><b>Delete this Seriesprivately: </b><a href="{% url 'references:seriesprivately-delete' object.id %}">Delete!</a></li>
         </ul>
     </body>
 </html>

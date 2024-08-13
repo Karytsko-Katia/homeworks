@@ -13,6 +13,8 @@
         <ul>
             <li><b>Author name: </b>{{ object.name }}</li>
             <li><b>Description: </b>{{ object.description }}</li>
+            <li><b>Update this Author: </b><a href="{% url 'references:author-update' object.id %}">{{ object.name }}</a></li>
+            <li><b>Delete this Author: </b><a href="{% url 'references:author-delete' object.id %}">{{ object.name }}</a></li>
         </ul>
 
 
@@ -30,3 +32,4 @@
 
     </body>
 </html>
+
