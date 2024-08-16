@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 PROJ_APPS = [
     'refs',
+    'goods',
 ]
 
 INSTALLED_APPS += PROJ_APPS
