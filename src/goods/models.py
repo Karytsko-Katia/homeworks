@@ -10,6 +10,7 @@ class Item(models.Model):
         )
     cover = models.ImageField(
         verbose_name='Фото обложки',
+        upload_to='item_covers/%Y/%m/%d/'
     )
     price = models.DecimalField(
         max_digits=7,
@@ -105,4 +106,7 @@ class Item(models.Model):
 
     def __str__(self):
         return f"#{self.pk} {self.title}" 
+    
+    def get_absolute_url (self):
+        return reverse_lazy("goods:item-detail", kwargs={"pk":self.pk})
 
