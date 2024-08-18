@@ -62,7 +62,7 @@ ROOT_URLCONF = 'proj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,6 +74,12 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+
 
 WSGI_APPLICATION = 'proj.wsgi.application'
 
@@ -123,10 +129,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = local_setting.STATIC_URL
-MEDIA_URL = local_setting.MEDIA_URL
-# STATIC_ROOT = local_setting.STATIC_ROOT
-MEDIA_ROOT = local_setting.MEDIA_ROOT
+STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+STATIC_ROOT = BASE_DIR.parent / 'static'
+MEDIA_ROOT = '/home/kate/Python/domashechki/homeworks/projects/dummy_django/media'
 
 
 # Default primary key field type

@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
-        <title>{{ page_title }}</title>
-    </head>
-    <body>
-        <h1>{{ heading }}</h1>
-        <p>{{ message}}</p>
-        <table border="2">
-            <tr>
-                <th>ID</th>
-                <th>Publishing's name</th>
-                <th>-----</th>
-            {% for obj in object_list %} 
-            <tr>
-                <td> #{{ obj.id }} </td>
-                <td> {{ obj.name }} </td>
-                <td><a href="{% url 'references:publishing-detail' obj.id %}">view</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-    </body>
-</html>
+{% extends "base.html" %}
+
+
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Publishing list </h1>
+    <table border="2">
+        <tr>
+            <th>ID</th>
+            <th>Publishing's name</th>
+            <th>-----</th>
+        {% for obj in object_list %} 
+        <tr>
+            <td> #{{ obj.id }} </td>
+            <td> {{ obj.name }} </td>
+            <td><a href="{% url 'references:publishing-detail' obj.id %}">view</a></td>
+        </tr>
+        {% endfor %}
+    </table> 
+{% endblock MAIN_CONTENT %}
+

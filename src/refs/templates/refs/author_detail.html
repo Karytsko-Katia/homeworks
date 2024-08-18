@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
-        <title>{{ page_title }}</title>
-    </head>
-    <body>
-        <h1>{{ heading }}</h1>
-        <p>{{ message}}</p>
-        <h1>Author #{{ object.id }} {{ object.name }} details: </h1>
-
-        <ul>
-            <li><b>Author name: </b>{{ object.name }}</li>
-            <li><b>Description: </b>{{ object.description }}</li>
-            <li><b>Update this Author: </b><a href="{% url 'references:author-update' object.id %}">{{ object.name }}</a></li>
-            <li><b>Delete this Author: </b><a href="{% url 'references:author-delete' object.id %}">{{ object.name }}</a></li>
-        </ul>
+{% extends "base.html" %}
 
 
-        {% if object.series.all %}
-            <h2><b>Series of book by this Author: </b></h2>
-            {% for serie in object.series.all %}
-                <ul>
-                        <li> {{serie.name}}</li>
-                </ul>
-            {% endfor %}
-        {% else %}
-            <h3><b>No series</b></h3>
-        {% endif %}
-        <a href="{% url 'references:series-create' %}">add a series of books</a>
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Author #{{ object.id }} {{ object.name }} details: </h1>
+      
+    <ul>
+        <li><b>Author name: </b>{{ object.name }}</li>
+        <li><b>Description: </b>{{ object.description }}</li>
+        <li><b>Update this Author: </b><a href="{% url 'references:author-update' object.id %}">{{ object.name }}</a></li>
+        <li><b>Delete this Author: </b><a href="{% url 'references:author-delete' object.id %}">{{ object.name }}</a></li>
+    </ul>
 
-    </body>
-</html>
+
+    {% if object.series.all %}
+        <h2><b>Series of book by this Author: </b></h2>
+        {% for serie in object.series.all %}
+            <ul>
+                    <li> {{serie.name}}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <h3><b>No series</b></h3>
+    {% endif %}
+    <a href="{% url 'references:series-create' %}">add a series of books</a>
+
+{% endblock MAIN_CONTENT %}
+
+
 

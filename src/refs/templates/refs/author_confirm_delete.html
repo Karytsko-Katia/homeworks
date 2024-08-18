@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
-        <title>{{ page_title }}</title>
-    </head>
-    <body>
-        <h1>{{ heading }}</h1>
-        <p>{{ message}}</p>
-        <h1>Are you sure, <br>
-            that you want to delete <br>
-            Author #{{ object.id }} {{ object.name }}? </h1>
+{% extends "base.html" %}
+
+
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Are you sure, <br>
+        that you want to delete <br>
+        Author #{{ object.id }} {{ object.name }}? </h1>
         {% if object.series.exists %}
-            <p>Delition is not possible because there are related objects!</p>
+        <p>Delition is not possible because there are related objects!</p>
+        <a href="{% url 'references:author-detail' object.id %}">Return to Author</a></li>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <p>Are you sure, that you want to delete Author #{{ object.id }} {{ object.name }}?</p>
+            <button type="submit">Delete</button>
             <a href="{% url 'references:author-detail' object.id %}">Return to Author</a></li>
-        {% else %}
-            <form method="post">
-                {% csrf_token %}
-                <p>Are you sure, that you want to delete Author #{{ object.id }} {{ object.name }}?</p>
-                <button type="submit">Delete</button>
-                <a href="{% url 'references:author-detail' object.id %}">Return to Author</a></li>
-            </form>
-        {% endif %}
-    </body>
-</html>
+        </form>
+    {% endif %}    
+{% endblock MAIN_CONTENT %}
+
+
+
 
 

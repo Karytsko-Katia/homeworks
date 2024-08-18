@@ -2,6 +2,8 @@ from django import forms
 from django.urls import reverse, reverse_lazy
 from django.core.exceptions import ValidationError
 
+from . import models
+
 
 def dennis_validator(value):
     if value[0:6] != "Dennis":
@@ -38,8 +40,6 @@ class ContactForm(forms.Form):
         return cleaned_data
  
         
-        
-
 #    subject = forms.CharField(max_length=100)
 #     message = forms.CharField(widget=forms.Textarea)
 #     sender = forms.EmailField()
@@ -55,3 +55,19 @@ class ContactForm(forms.Form):
 #         # Always return a value to use as the new cleaned data, even if
 #         # this method didn't change it.
 #         return data
+
+
+# class DummiItemCreateForm(forms.ModelForm):
+#     class Meta:
+#          newfield with my parametrs = describe new field
+#          model = models.DummiItem
+#          fields = ['title', 'cover', 'newfield with my parametrs']
+
+
+# class BasicForm(forms.Form):
+#     name = forms.CharField(
+#         max_length=123,
+#         min_length=1,
+#         required=True,
+#         label="Enter your name!",
+#         )

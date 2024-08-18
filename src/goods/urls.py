@@ -13,6 +13,7 @@ urlpatterns = [
     path('contact-us', views.contact_form, name="contact-us" ),
 ]
 
+# path('basic-form', views.basic_form, name="basic-form" ),
 #  path('author-list/', views.AuthorList.as_view(), name="author-list"),
 #     path('author-detail/<int:pk>/', views.AuthorDetail.as_view(), name="author-detail" ),
 #     path('author-update/<int:pk>/', views.AuthorUpdate.as_view(), name="author-update"),

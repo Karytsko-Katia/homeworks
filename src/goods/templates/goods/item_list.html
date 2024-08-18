@@ -1,60 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
-        <title>{{ page_title }}</title>
-    </head>
-    <body>
-        <h1>Book list</h1>
-        <h1>{{ page_title }}</h1>
-        <h1>{{ heading }}</h1>
-        <p>{{ message}}</p>
-        <table border="2">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Authors</th>
-                <th>Genre</th>
-                <th>Series</th>
-                <th>Price</th>
-                <th>Book_in_stoke</th>
-                <th>Active</th>
-                <th>Reting</th>
-                <th>Cover</th>
-                <th>-----</th>
-            {% for obj in object_list %} 
-            <tr>
-                <td> #{{ obj.id }} </td>
-                <td> {{ obj.title }} </td>
-                <td> 
-                    <ul>
-                    {% for author in obj.author.all %}
-                     <li> {{ author.name }}</li>
-                     {%endfor%}
-                    </ul>
-                </td>
-                <td> 
-                    <ul>
-                    {% for genre in obj.genre.all %}
-                     <li> {{ genre.name }}</li>
-                     {%endfor%}
-                    </ul>
-                </td>
-                <td> {{ obj.series }} </td>
-                <td>{{ obj.price }}</td>
-                <td>{{ obj.item_in_stock }}</td>
-                <td>{{ obj.active }}</td>
-                <td>{{ obj.rating }}</td>
-                <td><img src="{{ obj.cover.url }}" width="80" height="105" alt=""></td>
-                <td><a href="{% url 'goods:item-detail' obj.id %}">view</a></td>
-            </tr>
-            {% endfor %}
-        </table>
+{% extends "base.html" %}
 
-    </body>
-</html>
 
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Book list </h1>
+    <table border="2">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Genre</th>
+            <th>Series</th>
+            <th>Price</th>
+            <th>Active</th>
+            <th>Cover</th>
+            <th>-----</th>
+        {% for obj in object_list %} 
+        <tr>
+            <td> #{{ obj.id }} </td>
+            <td> {{ obj.title }} </td>
+            <td> 
+                <ul>
+                {% for author in obj.author.all %}
+                 <li> {{ author.name }}</li>
+                 {%endfor%}
+                </ul>
+            </td>
+            <td> 
+                <ul>
+                {% for genre in obj.genre.all %}
+                 <li> {{ genre.name }}</li>
+                 {%endfor%}
+                </ul>
+            </td>
+            <td> {{ obj.series }} </td>
+            <td>{{ obj.price }}</td>
+            <td>{{ obj.active }}</td>
+            <td><img src="{{ obj.cover.url }}" width="80" height="105" alt=""></td>
+            <td><a href="{% url 'goods:item-detail' obj.id %}">view</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+{% endblock MAIN_CONTENT %}
+
+
+
+<!-- <th>Book_in_stoke</th>
+<th>Reting</th>
+<td>{{ obj.item_in_stock }}</td>
+<td>{{ obj.rating }}</td> -->
 <!-- <td><img src="{{ obj.cover.url }}" width="80" height="105" alt=""></td> -->
 <!-- <a href = "{{ obj.cover.url }}" target="_blank"></a>
 <img src= "{{ obj.cover.url }}" alt="Thumbnail" style="width: 40 xp; height: 80 xp;"></a> -->

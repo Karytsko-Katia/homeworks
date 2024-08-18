@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
-        <title>{{ page_title }}</title>
-    </head>
-    <body>
-        <h1>{{ heading }}</h1>
-        <p>{{ message}}</p>
-        <h1>Are you sure, <br>
-            that you want to delete <br>
-            publishing #{{ object.id }} {{ object.name }}? </h1>
-        
+{% extends "base.html" %}
+
+
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Are you sure, <br>
+        that you want to delete <br>
+        publishing #{{ object.id }} {{ object.name }}?  </h1>
         <form method="post">
             {% csrf_token %}
             <p>Are you sure, that you want to delete publishing #{{ object.id }} {{ object.name }}?</p>
             <button type="submit">Delete</button>
             <a href="{% url 'references:publishing-detail' object.id %}">Return to Publishing</a></li>
-        </form>
-        
-    </body>
-</html>
+        </form> 
+{% endblock MAIN_CONTENT %}
+
+

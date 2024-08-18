@@ -57,3 +57,12 @@ def contact_form(request):
         return HttpResponseRedirect("/mess_send")
     
     # return HttpResponseRedirect(reverse_lazy("goods:item-detail"))
+
+# def basic_form(request):
+#     if request.method == "GET":
+#         form = forms.BasicForm()
+#         context = {"form": form}
+#         return render(
+#         request, 
+#         template_name="goods/basic_form.html",
+#         context=context)  

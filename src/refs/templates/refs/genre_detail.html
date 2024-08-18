@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
-        <title>{{ page_title }}</title>
-    </head>
-    <body>
-        <h1>{{ heading }}</h1>
-        <p>{{ message}}</p>
-        <h1>Gener #{{ object.id }} {{ object.name }} details: </h1>
+{% extends "base.html" %}
 
-        <ul>
-            <li><b>Genre's name: </b>{{ object.name }}</li>
-            <li><b>Description: </b>{{ object.description }}</li>
-            <li><b>Update this genre: </b><a href="{% url 'references:genre-update' object.id %}">{{ object.name }}</a></li>
-            <li><b>Delete this genre: </b><a href="{% url 'references:genre-delete' object.id %}">{{ object.name }}</a></li>
-        </ul>
-    </body>
-</html>
+
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Gener #{{ object.id }} {{ object.name }} details:  </h1>
+      
+    <ul>
+        <li><b>Genre's name: </b>{{ object.name }}</li>
+        <li><b>Description: </b>{{ object.description }}</li>
+        <li><b>Update this genre: </b><a href="{% url 'references:genre-update' object.id %}">{{ object.name }}</a></li>
+        <li><b>Delete this genre: </b><a href="{% url 'references:genre-delete' object.id %}">{{ object.name }}</a></li>
+    </ul> 
+{% endblock MAIN_CONTENT %}
+
