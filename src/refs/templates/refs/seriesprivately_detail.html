@@ -6,16 +6,16 @@
     <ul>
         <li><b>Author of seria </b>{{ object.series_name.author }}</li>
         <li><b>Author id </b>{{ object.series_name.author.id }}</li>
-        <ti><b>Author: </b><a href="{% url 'references:author-detail' object.series_name.author.pk %}">{{ object.series_name.author }}</a></li>
+        <ti><b>Author: </b><a href="{% url 'references:author-detail' object.series_name.author.pk %}" class="btn btn-outline-primary">{{ object.series_name.author }}</a></li>
         <li><b>Series name </b>{{ object.series_name }}</li>
         <li><b>Series id </b>{{ object.series_name.pk }}</li>
-        <ti><b>Series: </b><a href="{% url 'references:series-detail' object.series_name.pk %}">{{ object.series_name }}</a></li>
+        <ti><b>Series: </b><a href="{% url 'references:series-detail' object.series_name.pk %}" class="btn btn-outline-primary">{{ object.series_name }}</a></li>
         <li><b>Book of seria: </b>{{ object.series_name.total_number }}</li>
         <li><b>Book's name </b>{{ object.book_name }}</li>
         <li><b>Book's number of seria </b>{{ object.book_number }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
-        <li><b>Update this Seriesprivately: </b><a href="{% url 'references:seriesprivately-update' object.id %}">Start updating!</a></li>
-        <li><b>Delete this Seriesprivately: </b><a href="{% url 'references:seriesprivately-delete' object.id %}">Delete!</a></li>
+        <li><b>Update this Seriesprivately: </b><a href="{% url 'references:seriesprivately-update' object.id %}" class="btn btn-outline-primary">Start updating!</a></li>
+        <li><b>Delete this Seriesprivately: </b><a href="{% url 'references:seriesprivately-delete' object.id %}" class="btn btn-outline-primary">Delete!</a></li>
     </ul> 
 {% endblock MAIN_CONTENT %}
 

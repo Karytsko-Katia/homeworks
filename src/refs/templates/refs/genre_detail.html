@@ -7,8 +7,8 @@
     <ul>
         <li><b>Genre's name: </b>{{ object.name }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
-        <li><b>Update this genre: </b><a href="{% url 'references:genre-update' object.id %}">{{ object.name }}</a></li>
-        <li><b>Delete this genre: </b><a href="{% url 'references:genre-delete' object.id %}">{{ object.name }}</a></li>
+        <li><b>Update this genre: </b><a href="{% url 'references:genre-update' object.id %}" class="btn btn-outline-primary">{{ object.name }}</a></li>
+        <li><b>Delete this genre: </b><a href="{% url 'references:genre-delete' object.id %}" class="btn btn-outline-primary">{{ object.name }}</a></li>
     </ul> 
 {% endblock MAIN_CONTENT %}
 

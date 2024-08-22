@@ -6,8 +6,8 @@
     <ul>
         <li><b>Publishing's name: </b>{{ object.name }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
-        <li><b>Update this Publishing: </b><a href="{% url 'references:publishing-update' object.id %}">{{ object.name }}</a></li>
-        <li><b>Delete this Publishing: </b><a href="{% url 'references:publishing-delete' object.id %}">{{ object.name }}</a></li>
+        <li><b>Update this Publishing: </b><a href="{% url 'references:publishing-update' object.id %}" class="btn btn-outline-primary">{{ object.name }}</a></li>
+        <li><b>Delete this Publishing: </b><a href="{% url 'references:publishing-delete' object.id %}" class="btn btn-outline-primary">{{ object.name }}</a></li>
     </ul>  
 {% endblock MAIN_CONTENT %}
 

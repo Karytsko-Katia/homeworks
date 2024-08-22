@@ -3,7 +3,7 @@
 
 {% block MAIN_CONTENT %} 
     <h1 class="mt-5">  Genre list </h1>
-    <table border="2">
+    <table border="2" class="table table-success table-striped">
         <tr>
             <th>ID</th>
             <th>Gener's name</th>
@@ -12,7 +12,7 @@
         <tr>
             <td> #{{ obj.id }} </td>
             <td> {{ obj.name }} </td>
-            <td><a href="{% url 'references:genre-detail' obj.id %}">view</a></td>
+            <td><a href="{% url 'references:genre-detail' obj.id %}" class="btn btn-outline-primary">view</a></td>
         </tr>
         {% endfor %}
     </table>  

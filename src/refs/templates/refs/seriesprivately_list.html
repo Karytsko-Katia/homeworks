@@ -18,7 +18,7 @@
             <td> {{ obj.book_number }} </td>
             <td> {{ obj.series_name }} </td>
             <td> {{ obj.series_name.author }} </td>
-            <td><a href="{% url 'references:seriesprivately-detail' obj.id %}">view</a></td>
+            <td><a href="{% url 'references:seriesprivately-detail' obj.id %}" class="btn btn-outline-primary">view</a></td>
         </tr>
         {% endfor %}
     </table> 
