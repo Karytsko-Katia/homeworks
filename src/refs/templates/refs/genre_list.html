@@ -7,15 +7,19 @@
         <tr>
             <th>ID</th>
             <th>Gener's name</th>
-            <th>-----</th>
+            <th colspan="4" style="text-align: center;">Actions</th>
         {% for obj in object_list %} 
         <tr>
             <td> #{{ obj.id }} </td>
             <td> {{ obj.name }} </td>
-            <td><a href="{% url 'references:genre-detail' obj.id %}" class="btn btn-outline-primary">view</a></td>
+            <td><a href="{% url 'references:genre-detail' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i>View</a></td>
+            <td><a href="{% url 'references:genre-update' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></i>Update</a></td>
+            <td><a href="{% url 'references:genre-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i></i>Create</a></td>
+            <td><a href="{% url 'references:genre-delete' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>Delete</a></td>
         </tr>
         {% endfor %}
     </table>  
 {% endblock MAIN_CONTENT %}
 
-
+<!-- <table border="2" class="table table-success table-striped"></table> -->
+<!-- <i class="bi bi-eye"></i>  -->
