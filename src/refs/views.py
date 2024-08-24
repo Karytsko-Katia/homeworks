@@ -33,11 +33,12 @@ from . import models
 
 class AuthorList(generic.ListView):
     model = models.Author
+    fields = ['name', 'description']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = "Author list"
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['page_title'] = "Author list"
+    #     return context
     
 
 class AuthorDetail(generic.DetailView):
@@ -252,6 +253,11 @@ class SeriesDelete(generic.DeleteView):
 
 class SeriesPrivatelyList(generic.ListView):
     model = models.SeriesPrivately
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "SeriesPrivately list"
+        return context
    
 class SeriesPrivatelyDetail(generic.DetailView):
     model = models.SeriesPrivately

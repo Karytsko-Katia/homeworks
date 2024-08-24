@@ -8,8 +8,8 @@
         <li><b>Book title: </b>{{ object.title }}</li>
         <li><b>Author name: </b>{{ object.author }}</li>
         <li><b>Cover: </b>{{ object.cover }}</li> 
-        <li><b>Update this Book: </b><a href="{% url 'goods:item-update' object.id %}" class="btn btn-outline-primary">{{ object.title }}</a></li>
-        <li><b>Delete this Book: </b><a href="{% url 'goods:item-delete' object.id %}" class="btn btn-outline-primary">{{ object.title }}</a></li>  
+        <li><b>Update this Book: </b><a href="{% url 'goods:item-update' object.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i>{{ object.title }}</a></li>
+        <li><b>Delete this Book: </b><a href="{% url 'goods:item-delete' object.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>{{ object.title }}</a></li>  
     </ul>
     <p>Авторы:</p>
     <ul>

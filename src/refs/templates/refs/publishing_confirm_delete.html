@@ -8,8 +8,8 @@
         <form method="post">
             {% csrf_token %}
             <p>Are you sure, that you want to delete publishing #{{ object.id }} {{ object.name }}?</p>
-            <button type="submit" class="btn btn-danger">Delete</button>
-            <a href="{% url 'references:publishing-detail' object.id %}" class="btn btn-outline-primary">Return to Publishing</a></li>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i>Delete</button>
+            <a href="{% url 'references:publishing-detail' object.id %}" class="btn btn-outline-primary"><i class="bi bi-arrow-return-left"></i>Return to Publishing</a></li>
         </form> 
 {% endblock MAIN_CONTENT %}
 

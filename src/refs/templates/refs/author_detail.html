@@ -7,8 +7,8 @@
     <ul>
         <li><b>Author name: </b>{{ object.name }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
-        <li><b>Update this Author: </b><a href="{% url 'references:author-update' object.id %}" class="btn btn-outline-primary">{{ object.name }}</a></li>
-        <li><b>Delete this Author: </b><a href="{% url 'references:author-delete' object.id %}" class="btn btn-outline-primary">{{ object.name }}</a></li>
+        <li><b>Update this Author: </b><a href="{% url 'references:author-update' object.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i>{{ object.name }}</a></li>
+        <li><b>Delete this Author: </b><a href="{% url 'references:author-delete' object.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>{{ object.name }}</a></li>
     </ul>
 
 
@@ -22,7 +22,7 @@
     {% else %}
         <h3><b>No series</b></h3>
     {% endif %}
-    <a href="{% url 'references:series-create' %}" class="btn btn-outline-primary">add a series of books</a>
+    <a href="{% url 'references:series-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i>add a series of books</a>
 
 {% endblock MAIN_CONTENT %}
 

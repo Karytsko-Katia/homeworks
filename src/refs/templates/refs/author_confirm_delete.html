@@ -7,13 +7,13 @@
         Author #{{ object.id }} {{ object.name }}? </h1>
         {% if object.series.exists %}
         <p>Delition is not possible because there are related objects!</p>
-        <a href="{% url 'references:author-detail' object.id %}" class="btn btn-outline-primary">Return to Author</a></li>
+        <a href="{% url 'references:author-detail' object.id %}" class="btn btn-outline-primary"><i class="bi bi-arrow-return-left"></i>Return to Author</a></li>
     {% else %}
         <form method="post">
             {% csrf_token %}
             <p>Are you sure, that you want to delete Author #{{ object.id }} {{ object.name }}?</p>
-            <button type="submit" class="btn btn-danger">Delete</button>
-            <a href="{% url 'references:author-detail' object.id %}" class="btn btn-outline-primary">Return to Author</a></li>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i>Delete</button>
+            <a href="{% url 'references:author-detail' object.id %}" class="btn btn-outline-primary"><i class="bi bi-arrow-return-left"></i>Return to Author</a></li>
         </form>
     {% endif %}    
 {% endblock MAIN_CONTENT %}

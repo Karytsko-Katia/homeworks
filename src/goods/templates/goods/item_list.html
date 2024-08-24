@@ -3,7 +3,7 @@
 
 {% block MAIN_CONTENT %} 
     <h1 class="mt-5"> Book list </h1>
-    <table border="2">
+    <table border="2" class="table table-success table-striped">
         <tr>
             <th>ID</th>
             <th>Title</th>
@@ -13,7 +13,7 @@
             <th>Price</th>
             <th>Active</th>
             <th>Cover</th>
-            <th>-----</th>
+            <th colspan="3" style="text-align: center;">Actions</th>
         {% for obj in object_list %} 
         <tr>
             <td> #{{ obj.id }} </td>
@@ -36,9 +36,13 @@
             <td>{{ obj.price }}</td>
             <td>{{ obj.active }}</td>
             <td><img src="{{ obj.cover.url }}" width="80" height="105" alt=""></td>
-            <td><a href="{% url 'goods:item-detail' obj.id %}" class="btn btn-outline-primary">view</a></td>
+            <td><a href="{% url 'goods:item-detail' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i>view</a></td>
+            <td><a href="{% url 'goods:item-update' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></i>Update</a></td>
+            <td><a href="{% url 'goods:item-delete' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>Delete</a></td>
         </tr>
         {% endfor %}
+        <td colspan="8" style="text-align: center;">Добавить новую книгу</td>
+        <td colspan="3" style="text-align: center;"><a href="{% url 'goods:item-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i></i>Create</a></td>
     </table>  
 {% endblock MAIN_CONTENT %}
 

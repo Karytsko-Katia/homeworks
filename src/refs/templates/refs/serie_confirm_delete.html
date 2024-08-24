@@ -7,13 +7,13 @@
          #{{ object.id }} {{ object.name }}? </h1>
          {% if object.privately.exists %}
          <p>Delition is not possible because there are related objects!</p>
-         <a href="{% url 'references:series-detail' object.id %}" class="btn btn-outline-primary">Return to series</a></li>
+         <a href="{% url 'references:series-detail' object.id %}" class="btn btn-outline-primary"><i class="bi bi-arrow-return-left"></i>Return to series</a></li>
      {% else %}
          <form method="post">
              {% csrf_token %}
              <p>Are you sure, that you want to delete series #{{ object.id }} {{ object.name }}?</p>
-             <button type="submit" class="btn btn-danger">Delete</button>
-             <a href="{% url 'references:series-detail' object.id %}" class="btn btn-outline-primary">Return to seria</a></li>
+             <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i>Delete</button>
+             <a href="{% url 'references:series-detail' object.id %}" class="btn btn-outline-primary"><i class="bi bi-arrow-return-left"></i>Return to seria</a></li>
          </form>
      {% endif %}
 {% endblock MAIN_CONTENT %}

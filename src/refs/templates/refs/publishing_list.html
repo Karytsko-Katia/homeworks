@@ -3,18 +3,22 @@
 
 {% block MAIN_CONTENT %} 
     <h1 class="mt-5"> Publishing list </h1>
-    <table border="2">
+    <table border="2" class="table table-success table-striped">
         <tr>
             <th>ID</th>
             <th>Publishing's name</th>
-            <th>-----</th>
+            <th colspan="3" style="text-align: center;">Actions</th>
         {% for obj in object_list %} 
         <tr>
             <td> #{{ obj.id }} </td>
             <td> {{ obj.name }} </td>
-            <td><a href="{% url 'references:publishing-detail' obj.id %}" class="btn btn-outline-primary">view</a></td>
+            <td><a href="{% url 'references:publishing-detail' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i>view</a></td>
+            <td><a href="{% url 'references:publishing-update' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></i>Update</a></td>
+            <td><a href="{% url 'references:publishing-delete' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>Delete</a></td>
         </tr>
         {% endfor %}
+        <td colspan="2" style="text-align: center;">Добавить новое издательство</td>
+        <td colspan="3" style="text-align: center;"><a href="{% url 'references:publishing-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i></i>Create</a></td>
     </table> 
 {% endblock MAIN_CONTENT %}
 

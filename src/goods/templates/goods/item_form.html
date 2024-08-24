@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 
 {% block MAIN_CONTENT %} 
     <h1 class="mt-5"> FORM </h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Save</button>
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-success"><i class="bi bi-save2-fill"></i>Save</button>
        </form>
 {% endblock MAIN_CONTENT %}
 

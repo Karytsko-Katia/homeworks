@@ -3,20 +3,24 @@
 
 {% block MAIN_CONTENT %} 
     <h1 class="mt-5"> Series list </h1>
-    <table border="2">
+    <table border="2" class="table table-success table-striped">
         <tr>
             <th>ID</th>
             <th>Author of seria</th>
             <th>Series name</th>
-            <th>-----</th>
+            <th colspan="3" style="text-align: center;">Actions</th>
         {% for obj in object_list %} 
         <tr>
             <td> #{{ obj.id }} </td>
             <td> {{ obj.author }} </td>
             <td> {{ obj.name }} </td>
-            <td><a href="{% url 'references:series-detail' obj.id %}" class="btn btn-outline-primary">view</a></td>
+            <td><a href="{% url 'references:series-detail' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i>view</a></td>
+            <td><a href="{% url 'references:series-update' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i></i>Update</a></td>
+            <td><a href="{% url 'references:series-delete' obj.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>Delete</a></td>
         </tr>
         {% endfor %}
+        <td colspan="3" style="text-align: center;">Добавить новую серию</td>
+        <td colspan="3" style="text-align: center;"><a href="{% url 'references:series-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i></i>Create</a></td>
     </table>  
 {% endblock MAIN_CONTENT %}
 

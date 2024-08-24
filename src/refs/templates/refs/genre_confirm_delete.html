@@ -9,8 +9,8 @@
         <form method="post">
             {% csrf_token %}
             <p>Are you sure, that you want to delete Genre #{{ object.id }} {{ object.name }}?</p>
-            <button type="submit" class="btn btn-danger">Delete</button>
-            <a href="{% url 'references:genre-detail' object.id %}" class="btn btn-outline-primary">Return to Genre</a></li>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i>Delete</button>
+            <a href="{% url 'references:genre-detail' object.id %}" class="btn btn-outline-primary"><i class="bi bi-arrow-return-left"></i>Return to Genre</a></li>
         </form>
        
 {% endblock MAIN_CONTENT %}
