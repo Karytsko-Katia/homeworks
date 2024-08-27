@@ -56,6 +56,8 @@ def contact_form(request):
                  )
         return HttpResponseRedirect("/mess_send")
     
+    
+    
     # return HttpResponseRedirect(reverse_lazy("goods:item-detail"))
 
 # def basic_form(request):

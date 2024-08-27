@@ -23,8 +23,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('refs/', include('refs.urls', namespace="references")),
-    path('goods/', include('goods.urls', namespace="goods"))
+    path('goods/', include('goods.urls', namespace="goods")),
+    path('acc/', include('acc.urls', namespace="accounts")),
 ] 
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# path("accounts/", include("django.contrib.auth.urls"))

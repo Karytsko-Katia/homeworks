@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 # from django.http import HttpResponse, HttpResponseRedirect
 # from django.views.decorators.csrf import csrf_exempt
+# from django.conf import settings (for import files?)
 
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
@@ -8,6 +9,8 @@ from django.db.models import ProtectedError
 
 from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from . import models
 
@@ -262,13 +265,25 @@ class SeriesPrivatelyList(generic.ListView):
 class SeriesPrivatelyDetail(generic.DetailView):
     model = models.SeriesPrivately
 
-class SeriesPrivatelyCreate(generic.CreateView):
+class SeriesPrivatelyCreate(LoginRequiredMixin, generic.CreateView):
     model = models.SeriesPrivately
     fields = ['book_number', 'book_name', 'series_name', 'description']
+    login_url = reverse_lazy("accounts:login")
    
-class SeriesPrivatelyUpdate(generic.UpdateView):
+class SeriesPrivatelyUpdate(LoginRequiredMixin, generic.UpdateView):
     model = models.SeriesPrivately
     fields = ['book_number', 'book_name', 'series_name', 'description']
+    login_url = reverse_lazy("accounts:login")
+
+    
+# class SeriesPrivatelyUpdate(UserPassesTestMixin, generic.UpdateView):
+#     model = models.SeriesPrivately
+#     fields = ['book_number', 'book_name', 'series_name', 'description']
+
+#     def test_func(self):
+#         if self.request.user.username[0] == "A":
+#             return True
+#         return False
 
 class SeriesPrivatelyDelete(generic.DeleteView):
     model = models.SeriesPrivately
