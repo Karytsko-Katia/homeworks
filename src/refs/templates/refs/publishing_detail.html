@@ -6,8 +6,10 @@
     <ul>
         <li><b>Publishing's name: </b>{{ object.name }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
+        {% if user.is_authenticated and perms.refs.delete_publishing%}
         <li><b>Update this Publishing: </b><a href="{% url 'references:publishing-update' object.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i>{{ object.name }}</a></li>
         <li><b>Delete this Publishing: </b><a href="{% url 'references:publishing-delete' object.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>{{ object.name }}</a></li>
+        {% endif %}
     </ul>  
 {% endblock MAIN_CONTENT %}
 

@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-# from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 # from django.views.decorators.csrf import csrf_exempt
 # from django.conf import settings (for import files?)
 
@@ -9,7 +9,7 @@ from django.db.models import ProtectedError
 
 from django.urls import reverse, reverse_lazy
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 from . import models
@@ -258,17 +258,37 @@ class SeriesPrivatelyList(generic.ListView):
     model = models.SeriesPrivately
 
     def get_context_data(self, **kwargs):
+        # print(self.request.user.get_all_permissions())
         context = super().get_context_data(**kwargs)
         context['page_title'] = "SeriesPrivately list"
         return context
    
+    # def get_context_data(self, **kwargs):
+    #     print(self.request.user)
+    #     print(self.request.user.get_user_permissions())
+    #     print(self.request.user.get_group_permissions())
+    #     print(self.request.user.get_all_permissions())
+    #     if self.request.user.has_perm('refs.add_seriesprivately'):
+    #         context['hello_mesage'] = "You can add seriesprivately"
+    #     else:
+    #         context['hello_mesage'] = "You can NOT add seriesprivately"
+    # + add {{ hello_message}} to template!
+    #     context = super ).get_context_data(**kwargs)
+    #     context['page_title'] = "SeriesPrivately list"
+    #     return context
+
 class SeriesPrivatelyDetail(generic.DetailView):
     model = models.SeriesPrivately
 
-class SeriesPrivatelyCreate(LoginRequiredMixin, generic.CreateView):
+class SeriesPrivatelyCreate(PermissionRequiredMixin, generic.CreateView):
     model = models.SeriesPrivately
     fields = ['book_number', 'book_name', 'series_name', 'description']
     login_url = reverse_lazy("accounts:login")
+    permission_required = [
+        "refs.add_seriesprivately"
+    ]
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse_lazy("references:seriesprivately-list"))   
    
 class SeriesPrivatelyUpdate(LoginRequiredMixin, generic.UpdateView):
     model = models.SeriesPrivately
@@ -285,9 +305,15 @@ class SeriesPrivatelyUpdate(LoginRequiredMixin, generic.UpdateView):
 #             return True
 #         return False
 
-class SeriesPrivatelyDelete(generic.DeleteView):
+class SeriesPrivatelyDelete(UserPassesTestMixin, generic.DeleteView):
     model = models.SeriesPrivately
     success_url = reverse_lazy("references:seriesprivately-list")
+
+    def test_func(self):
+        user = self.request.user
+        if user.groups.filter(name='Managers'):
+            return True
+  
 
 # def series_detail(request, serie_id):
 #     serie = models.Serie.objects.get(pk=serie_id)

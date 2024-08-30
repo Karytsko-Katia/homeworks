@@ -87,6 +87,9 @@ class SeriesPrivately(models.Model):
     def get_absolute_url (self):
         return reverse_lazy("references:seriesprivately-detail", kwargs={"pk":self.pk})
 
+    # class Meta:
+    #     permissions = [
+    #         ('can_view-lists', 'Can view lists')]
 
 # class Book(models.Model):
 #     name = models.CharField(max_length=100)

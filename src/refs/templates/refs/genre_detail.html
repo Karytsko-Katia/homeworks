@@ -7,8 +7,10 @@
     <ul>
         <li><b>Genre's name: </b>{{ object.name }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
+        {% if user.is_authenticated and perms.refs.delete_genre%}
         <li><b>Update this genre: </b><a href="{% url 'references:genre-update' object.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i>{{ object.name }}</a></li>
         <li><b>Delete this genre: </b><a href="{% url 'references:genre-delete' object.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>{{ object.name }}</a></li>
+        {% endif %}
     </ul> 
 {% endblock MAIN_CONTENT %}
 

@@ -4,12 +4,16 @@
 
 {% block MAIN_CONTENT %} 
 {{ user }}
+{% if perms.refs.delete_seriesprivately %}
+<h1>You can delete seriesprivately</h1>
+{% endif %} 
+
     <h1 class="mt-5"> FORM </h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form | crispy }}
         <button type="submit" class="btn btn-success"><i class="bi bi-save2-fill"></i>Save</button>
        </form>  
-     
+  
 {% endblock MAIN_CONTENT %}
 

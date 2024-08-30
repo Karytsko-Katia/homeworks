@@ -14,8 +14,10 @@
         <li><b>Book's name </b>{{ object.book_name }}</li>
         <li><b>Book's number of seria </b>{{ object.book_number }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
+        {% if user.is_authenticated and perms.refs.delete_seriesprivately%}
         <li><b>Update this Seriesprivately: </b><a href="{% url 'references:seriesprivately-update' object.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i>Start updating!</a></li>
         <li><b>Delete this Seriesprivately: </b><a href="{% url 'references:seriesprivately-delete' object.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>Delete!</a></li>
+        {% endif %}
     </ul> 
 {% endblock MAIN_CONTENT %}
 

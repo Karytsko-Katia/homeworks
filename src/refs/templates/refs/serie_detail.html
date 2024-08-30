@@ -9,8 +9,10 @@
         <ti><b>Author: </b><a href="{% url 'references:author-detail' object.author.id %}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i>{{ object.author.name }}</a></li>
         <li><b>Book of seria: </b>{{ object.total_number }}</li>
         <li><b>Description: </b>{{ object.description }}</li>
+        {% if user.is_authenticated and perms.refs.delete_serie%}
         <li><b>Update this seria: </b><a href="{% url 'references:series-update' object.id %}" class="btn btn-outline-primary"><i class="bi bi-pencil-fill"></i>{{ object.name }}</a></li>
         <li><b>Delete this seria: </b><a href="{% url 'references:series-delete' object.id %}" class="btn btn-outline-primary"><i class="bi bi-trash-fill"></i>{{ object.name }}</a></li>
+        {% endif %}
     </ul>  
 {% endblock MAIN_CONTENT %}
 
