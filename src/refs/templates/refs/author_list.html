@@ -19,7 +19,7 @@
             {% endif %}
         </tr>
         {% endfor %}
-        {% if user.is_authenticated and perms.refs.create_author%}
+        {% if user.is_authenticated and perms.refs.add_author%}
         <td colspan="2" style="text-align: center;">Добавить нового автора</td>
         <td colspan="3" style="text-align: center;"><a href="{% url 'references:author-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i></i>Create</a></td>
         {% endif %}

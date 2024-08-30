@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5"> Your {{object}} details:  </h1>
+      <b>User: </b> {{user}} <br>
+      <b>User phone number: </b> {{object.phone_number}} <br>
+      <b>User email: </b> {{user.email}} <br>
+      <b>Delivery adress: </b> {{user.profile.delivery_address}} <br>
+
+    
+{% endblock MAIN_CONTENT %}

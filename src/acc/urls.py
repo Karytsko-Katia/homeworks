@@ -6,6 +6,8 @@ app_name = "accounts"
 
 urlpatterns = [
     path('login', views.MyLoginView.as_view(), name="login" ),
+    path('profile', views.CustomerProfileDetail.as_view(), name="profile-detail" ),
+    path('profile-create', views.CustomerProfileCreate.as_view(), name="profile-create" ),
 ]
 
 #  path('login', views.logtin_view, name="login" ),
