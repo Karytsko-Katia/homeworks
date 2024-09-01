@@ -97,10 +97,12 @@ class Item(models.Model):
     )
     date_added = models.DateTimeField(
         auto_now_add=True,
+        auto_now=False,
         verbose_name='Дата внесения в каталог'
         )
     date_last_modified = models.DateTimeField(
         auto_now=True,
+        auto_now_add=False,
         verbose_name='Дата последнего изменения карточки'
         )
 

@@ -43,7 +43,7 @@
             {% endif %}
         </tr>
         {% endfor %}
-        {% if user.is_authenticated and perms.refs.add_item%}
+        {% if user.is_authenticated and perms.goods.add_item%}
         <td colspan="8" style="text-align: center;">Добавить новую книгу</td>
         <td colspan="3" style="text-align: center;"><a href="{% url 'goods:item-create' %}" class="btn btn-outline-primary"><i class="bi bi-align-middle"></i></i>Create</a></td>
         {% endif %}

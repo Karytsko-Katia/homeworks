@@ -25,6 +25,7 @@ urlpatterns = [
     path('refs/', include('refs.urls', namespace="references")),
     path('goods/', include('goods.urls', namespace="goods")),
     path('acc/', include('acc.urls', namespace="accounts")),
+    path('orders/', include('orders.urls', namespace="orders")),
 ] 
 
 if settings.DEBUG:
