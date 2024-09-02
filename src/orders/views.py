@@ -19,6 +19,15 @@ from . import models
 
 # Create your views here.
 
+def update_item_in_cart(key, quantity):
+    item_in_cart_id = int(key.split(".")[1])
+    item_in_cart = models.ItemInCart.objects.get(pk=item_in_cart_id)
+    if int(quantity) == 0:
+        item_in_cart.delete()
+    else:
+        item_in_cart.quantity = int(quantity)
+        item_in_cart.save()
+
 def get_or_create_current_cart(request):
     cart_id = request.session.get('cart_id', None)
     if request.user.is_anonymous:
@@ -44,6 +53,12 @@ def get_or_create_current_cart(request):
 #     else:
 #         cart = models.Cart.objects.get()
 #     return cart_id
+
+
+def create_order():
+    pass
+
+
 
 def get_current_cart(request):
     cart_id = request.session.get('cart_id', None)
@@ -84,6 +99,22 @@ def view_cart(request):
         template_name="orders/view_cart.html", 
         context=context,
         )
+
+def evaluate_cart(request):
+    if request.method == "POST":
+        print(request.POST)
+        action = None
+        for key, value in request.POST.items():
+            if key[0:4] == "quan":
+                update_item_in_cart(key, value)
+            if key[0:4] == "acti":
+                action = value
+        if action == "update":          
+            return HttpResponseRedirect(reverse_lazy('orders:view-cart'))
+        create_order()
+        return HttpResponseRedirect(reverse_lazy('orders:view-order-create'))
+
+
 
 def add_item_to_cart_view(request):
     if request.method == "POST":

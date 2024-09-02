@@ -11,7 +11,41 @@
         <li>Updated {{cart.updated}}</li>
     </ul>
     <h3>Items in cart:</h3>
-    
+    <form action="{% url 'orders:evaluate-cart'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <table class="table table-success table-striped">
+        <tr>
+            <th>Item</th>
+            <th>Price per item </th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th colspan="1" style="text-align: left;">Actions</th>
+        {% for item_in_cart in cart.items.all %} 
+        <tr>
+            <td> {{ item_in_cart.item.title }} </td>
+            <td> {{ item_in_cart.price_per_item }} </td>
+            <td> 
+                <div class="mb-3">
+                    <input type="number" 
+                    name="quantity.{{ item_in_cart.item.pk }}"
+                    class="form-control"  
+                    step="1" 
+                    value="{{ item_in_cart.quantity }}"
+                    min="0">
+                </div>
+            </td>
+            <td> {{ item_in_cart.price }} </td>
+            <td> #</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3" style="text-align: left;"><b>Order price:</b></td>
+            <td colspan="2" style="text-align: left;"><b>{{cart.order_price}}</b></td>
+        </tr>
+    </table> 
+    <button type="submit" name="action"  value="update" class="btn btn-primary"><i class="bi bi-pencil-fill"></i>Update</button>
+    <button type="submit" name="action" value="create" class="btn btn-success"><i class="bi bi-align-middle"></i>Create order</button>   
+    </form>
     {% else %}
     <h2> Your cart is empty! </h2>
     {% endif %}

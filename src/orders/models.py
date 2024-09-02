@@ -28,8 +28,15 @@ class Cart(models.Model):
         )
 
     def __str__(self):
-        return f"Cart # {self.pk} for {self.user}"
-    
+        return f"Cart # {self.pk} for {self.user}"  
+    @property
+    def order_price(self):
+        items = self.items.all()
+        total_order_price = 0
+        for item in items:
+            total_order_price += item.price
+        return total_order_price
+
 class ItemInCart(models.Model):
     cart = models.ForeignKey(
         Cart,
@@ -52,6 +59,9 @@ class ItemInCart(models.Model):
         max_digits=7,
         decimal_places=2,
     )
+    @property
+    def price(self):
+        return self.quantity * self.price_per_item
 
     def __str__(self):
         return f"Item {self.item.pk} in cart {self.cart.pk}, quantity {self.quantity}"
