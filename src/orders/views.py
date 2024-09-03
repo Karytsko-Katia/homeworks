@@ -1,3 +1,4 @@
+from django.forms import BaseModelForm
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -10,14 +11,22 @@ from django.urls import reverse, reverse_lazy
 # from django.db.models import ProtectedError
 
 
-# from django.views import generic
+from django.views import generic
 # from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # from django.contrib.auth.mixins import UserPassesTestMixin
 from goods import models as book_models
-from . import models
+from acc import models as acc_models
+from . import models, forms
 
 
 # Create your views here.
+
+def get_customer_date(user):
+    # delivery_adress = user.profile.delivery_address
+    phone_number = user.profile.phone_number
+    # add_inform = user.profile.add_inform
+    return phone_number
+
 
 def update_item_in_cart(key, quantity):
     item_in_cart_id = int(key.split(".")[1])
@@ -55,8 +64,11 @@ def get_or_create_current_cart(request):
 #     return cart_id
 
 
-def create_order():
+def create_order(request):
+    cart = get_current_cart(request)
     pass
+
+    
 
 
 
@@ -111,7 +123,6 @@ def evaluate_cart(request):
                 action = value
         if action == "update":          
             return HttpResponseRedirect(reverse_lazy('orders:view-cart'))
-        create_order()
         return HttpResponseRedirect(reverse_lazy('orders:view-order-create'))
 
 
@@ -120,3 +131,19 @@ def add_item_to_cart_view(request):
     if request.method == "POST":
         add_item_to_cart(request)
     return HttpResponseRedirect(reverse_lazy('orders:view-cart'))
+
+class OrderCreateView(generic.CreateView):
+    model = models.Order
+    form_class = forms.OrderCreateForm
+    template_name = "orders/create_order.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart'] = get_current_cart(self.request)
+        return context
+    
+    def get_form(self, **kwargs):
+        form = super().get_form(**kwargs)
+        form.fields["phone_number"].initial = get_customer_date(self.request.user)
+        return form
+        # print(dir(form.fields['phone_number']))

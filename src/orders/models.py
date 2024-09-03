@@ -65,3 +65,31 @@ class ItemInCart(models.Model):
 
     def __str__(self):
         return f"Item {self.item.pk} in cart {self.cart.pk}, quantity {self.quantity}"
+    
+
+class Order(models.Model):
+    cart = models.OneToOneField(
+        Cart,
+        on_delete=models.PROTECT,
+        related_name="cart",
+        )
+    delivery_address = models.CharField(
+        max_length=500, 
+        verbose_name="Адрес доставки",
+        default="Товар доставить по адресу:",
+        )
+    phone_number = models.CharField(
+        max_length=15, 
+        default="+375",
+        verbose_name="Номер телефона"
+        )
+    add_inform = models.CharField(
+        max_length=300, 
+        verbose_name="Дополнительная информация",
+        blank=True,
+        null=True
+        )
+    
+    def __str__(self):
+        return f"Order #{self.pk}"  
+
