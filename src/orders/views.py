@@ -15,17 +15,18 @@ from django.views import generic
 # from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # from django.contrib.auth.mixins import UserPassesTestMixin
 from goods import models as book_models
-from acc import models as acc_models
+# from acc import models as acc_models
+from acc.models import CustomerProfile
 from . import models, forms
 
 
 # Create your views here.
 
-def get_customer_date(user):
-    # delivery_adress = user.profile.delivery_address
-    phone_number = user.profile.phone_number
-    # add_inform = user.profile.add_inform
-    return phone_number
+# def get_customer_date(user):
+#     # phone_number = user.profile.phone_number
+#     delivery_address = user.profile.delivery_address
+#     # add_inform = user.profile.add_inform
+#     return delivery_address
 
 
 def update_item_in_cart(key, quantity):
@@ -136,6 +137,7 @@ class OrderCreateView(generic.CreateView):
     model = models.Order
     form_class = forms.OrderCreateForm
     template_name = "orders/create_order.html"
+    success_url = reverse_lazy('orders:created-page')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,6 +146,53 @@ class OrderCreateView(generic.CreateView):
     
     def get_form(self, **kwargs):
         form = super().get_form(**kwargs)
-        form.fields["phone_number"].initial = get_customer_date(self.request.user)
+        profile = None
+        if self.request.user.is_authenticated:
+            try:
+                profile = self.request.user.profile
+            except CustomerProfile.DoesNotExist:
+                profile = None
+        if profile:
+            form.fields["phone_number"].initial = profile.phone_number
+            form.fields["delivery_address"].initial = profile.delivery_address
+            form.fields["add_inform"].initial = profile.add_inform              
         return form
+    
+
+
         # print(dir(form.fields['phone_number']))
+
+    # def get_form(self, **kwargs):
+    #     form = super().get_form(**kwargs)
+    #     form.fields["phone_number"].initial = get_customer_date(self.request.user)
+    #     form.fields["delivery_address"].initial = get_customer_date(self.request.user)
+    #     form.fields["add_inform"].initial = get_customer_date(self.request.user)
+    #     return form
+    #     try:
+        #     form.fields["phone_number"].initial = get_customer_date(self.request.user)
+        #     form.fields["delivery_address"].initial = get_customer_date(self.request.user)
+        #     form.fields["add_inform"].initial = get_customer_date(self.request.user)
+        # except Profile.DoesNotExist:
+        #     pass
+        # return form
+
+
+
+    def form_valid(self, form):
+        order = form.save(commit=False)
+        order.cart = get_current_cart(self.request)
+        order.save()
+        self.object = order
+        return HttpResponseRedirect(self.get_success_url())
+    
+
+class OrderFullCreatedView(generic.TemplateView):
+    template_name = "orders/created.html"
+
+    def get(self, request, *args, **kwargs):
+        if 'cart_id' in request.session:
+            del request.session['cart_id']
+        return super().get(request, *args, **kwargs)
+    
+    # context = self.get_context_data(**kwargs)
+    #     return self.render_to_response(context)
