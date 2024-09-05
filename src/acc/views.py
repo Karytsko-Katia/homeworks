@@ -13,6 +13,19 @@ from . import models, forms
 
 class MyLoginView(auth_views.LoginView):
     template_name = "acc/login.html"
+    # def get_success_url(self):
+    #     profile = None
+    #     try:
+    #         profile = self.request.user.profile
+    #     except CustomerProfile.DoesNotExist:
+    #         profile = None
+    #     if profile:
+    #         return HttpResponseRedirect(reverse_lazy('accounts:profile-detail'))
+    #     else:
+    #         return HttpResponseRedirect(reverse_lazy('accounts:profile-create'))
+
+    
+
 
 class CheckProfileMixin(LoginRequiredMixin):
     redirect_on_missing_profile = True
@@ -129,35 +142,35 @@ class CustomerProfileDetail(CheckProfileMixin, generic.DetailView):
 
 # from django.contrib.auth import authenticate, login
 # def login_view(request):   
-#   if request.method == "GET":
-#          return_to = request.GET.get('next')
-#          context = {
-#              'return_to': return_to
-#              }
-#          return render(
-#          request, 
-#          template_name="acc/login_form.html",
-#          context=context)
+#     if request.method == "GET":
+#         return_to = request.GET.get('next')
+#         context = {
+#               'return_to': return_to
+#               }
+#         return render(
+#           request, 
+#           template_name="acc/login_form.html",
+#           context=context)
 #     if request.method == "POST":
 #         username = request.POST["username"]
 #         password = request.POST["password"]
 #         redirect_to = request.POST.get("next", "/")
 #         user = authenticate(request, username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         return HttpResponseRedirect(redirect_to) 
-#     else:
-#         context = {
-#             'error_message': 'Username or/and password are incorrect',
-#             'username': username,
-#             }
-#         return render(
-#                   request, 
-#                   template_name="acc/login_form.html",
-#                   context=context
+#         if user is not None:
+#             login(request, user)
+#             return HttpResponseRedirect(redirect_to) 
+#         else:
+#             context = {
+#              'error_message': 'Username or/and password are incorrect',
+#              'username': username,
+#              }
+#             return render(
+#                    request, 
+#                    template_name="acc/login_form.html",
+#                    context=context
 #                   )
-    # return HttpResponseRedirect("/mess_send")
-    # # return reverse_lazy("goods:item-list")
+#         return HttpResponseRedirect("/mess_send")
+#     return reverse_lazy("goods:item-list")
 
 
 

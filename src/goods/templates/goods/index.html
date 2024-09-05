@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+{% block MAIN_CONTENT %} 
+    <h1 class="mt-5" style="text-align: center;"> WELCOM to DUMMY BOOK STORE! </h1>
+
+<style>
+    body{
+        background-color: green;
+    }
+</style> 
+<a href="{% url 'goods:item-list'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>List of Book</a>
+<a href="{% url 'references:author-list'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>List of Author</a>
+<a href="{% url 'references:series-list'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>List of series book</a>
+<a href="{% url 'references:genre-list'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>List of genre</a>
+<a href="{% url 'references:publishing-list'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>List of publishing</a>
+<a href="{% url 'accounts:profile-create'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>Profile create</a>
+<a href="{% url 'orders:view-cart'%}" class="btn btn-primary"><i class="bi bi-arrow-return-left"></i>Cart</a>
+
+
+<div>
+
+    </div>
+{% endblock MAIN_CONTENT %}

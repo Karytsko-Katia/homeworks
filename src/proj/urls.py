@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from goods import views
 
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     path('goods/', include('goods.urls', namespace="goods")),
     path('acc/', include('acc.urls', namespace="accounts")),
     path('orders/', include('orders.urls', namespace="orders")),
+    path('', views.HomeView.as_view(), name="home" ),
 ] 
 
 if settings.DEBUG:

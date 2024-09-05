@@ -68,3 +68,8 @@ def contact_form(request):
 #         request, 
 #         template_name="goods/basic_form.html",
 #         context=context)  
+
+
+
+class HomeView(generic.TemplateView):
+    template_name = "goods/index.html"
